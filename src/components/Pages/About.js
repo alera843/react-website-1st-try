@@ -1,10 +1,18 @@
 import React, {Component} from 'react';
+import Header from '../Common/Header';
+import image from '../assets/img/header-bg.jpg';
 
 
 class About extends Component {
 
 	render(){
-		return(
+		return(<div>
+			<Header
+				title = "About Us"
+				subtitle = "It's really a gerat story"
+				showButton =  {false}
+				image = {image}
+			/>
 			<section className="page-section" id="about">
 			    <div className="container">
 			      <div className="row">
@@ -85,6 +93,7 @@ class About extends Component {
 			      </div>
 			    </div>
   			</section>
+		</div>
 		)
 	}
 }
