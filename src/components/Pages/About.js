@@ -11,7 +11,7 @@ class About extends Component {
 		return(<div>
 			<Header
 				title = "About Us"
-				subtitle = "It's really a gerat story"
+				subtitle = "It's really a great story"
 				showButton =  {false}
 				image = {image}
 			/>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Field from '../Common/Field';
 import {withFormik} from 'formik';
+import * as Yup from 'yup';
 
 
 const fields= {
@@ -39,7 +40,7 @@ class Contact extends Component {
 									   return(
 										   <div className='col-md-6' key= {sectionIndex}>
 											   {section.map((field, i) => {
-												   return(<Field
+												   return <Field
 													   {...field}
 													   key={i}
 													   value={this.props.values[field.name]}
@@ -48,7 +49,7 @@ class Contact extends Component {
 													   onBlur={this.props.handleBlur}
 													   touched={(this.props.touched[field.name])}
 													   errors={this.props.errors[field.name]}
-												    /> )
+												    />
 											   })}
 										   </div>
 									   )
@@ -79,17 +80,17 @@ export default withFormik({
 		phone: '',
 		message: '',
 	}),
-	validate: values => {
-		const errors = {};
-
-		Object.keys(values).map(v => {
-			if(!values[v]){
-				errors[v] = 'Required';
-			}
-		})
-
-		return errors;
-	},
+	validationSchema: Yup.object().shape({
+		name: Yup.string().min(3, 'You should type at least 3 symbols').required('You must fill in your name'),
+		email: Yup.string().email('This is not a valid email').required('We need your email to reply'),
+		phone: Yup.string()
+			.min(10, 'Please provide at least 10 digits phone number')
+			.max(20, 'Your phone number is too long')
+			.required('Please, add your phone number')
+			.matches(/^[0-9]*$/, 'Please, use digits only'),
+		message: Yup.string().min(200, 'Your message should be at least 200 symbols')
+			.required('Message is required'),
+	}),
 	handleSubmit:(values, {setSubmitting}) => {
 		alert('You submitted the form', JSON.stringify(values));
 	}
