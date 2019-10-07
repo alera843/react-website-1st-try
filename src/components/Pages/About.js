@@ -4,7 +4,6 @@ import image from '../assets/img/header-bg.jpg';
 import Timeline from '../Common/Timeline';
 import Team from '../Common/Team';
 
-
 class About extends Component {
 
 	render(){
